@@ -1,0 +1,18 @@
+apiVersion: polyfea.github.io/v1alpha1
+kind: WebComponent
+metadata:
+  name: cv2xvancoa-blood-donors-ufe-content
+spec:
+  microFrontend: cv2xvancoa-blood-donors-ufe
+  element: cv2xvancoa-blood-donors
+  attributes:
+    - name: api-base
+      value: /cv2xvancoa-api
+    - name: site-id
+      value: bratislava-bory
+    - name: base-path
+      value: /cv2xvancoa-blood-donors/
+  displayRules:
+    - allOf:
+      - context-name: main-content
+      - path: "^(\\.?/)?cv2xvancoa-blood-donors(/.*)?$"

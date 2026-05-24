@@ -1,0 +1,72 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: authn
+  namespace: wac-hospital
+spec:
+    targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: wac-hospital-gateway
+      sectionName: fqdn
+
+    oidc:
+      provider:
+        issuer: https://wac-hospital.loc/dex
+        authorizationEndpoint: https://wac-hospital.loc/dex/auth
+        tokenEndpoint: http://dex.wac-hospital:5556/dex/token
+      clientIDRef:
+        name: oidc-dex
+      clientSecret:
+        name: oidc-dex
+      redirectURL: https://wac-hospital.loc/authn/callback
+      forwardAccessToken: true
+      cookieNames:
+        idToken: wac-hospital-id-token
+        accessToken: wac-hospital-access-token
+      scopes:
+      - profile
+      - email
+      - openid
+      - federated:id
+    jwt:
+      optional: false
+      providers:
+      - claimToHeaders:
+        - claim: name
+          header: x-forwarded-preferred-username
+        - claim: name
+          header: x-forwarded-user
+        - claim: email
+          header: x-forwarded-email
+        extractFrom:
+          cookies:
+          - wac-hospital-id-token
+        name: dex-sso
+        remoteJWKS:
+          uri: http://dex.wac-hospital:5556/dex/keys
+    extAuth:
+      grpc:
+        backendRefs:
+          - name: opa-plugin
+            port: 9191
+      headersToExtAuth:
+        - x-forwarded-preferred-username
+        - x-forwarded-user
+        - x-forwarded-email
+---
+# Tato policy je viac špecifická (htt-route > gateway)
+# a preto bude mať prednosť pred authn policy
+# v tomto pripade dovolime neauthentifikované požiadavky
+# pre protokol oidc aby sme sa vyhli nekonečným presmerovaniam
+# (autentifikácii požiadaviek o autentifikáciu)
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: dex-bypass-authn
+  namespace: wac-hospital
+spec:
+    targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: dex

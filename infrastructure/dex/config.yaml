@@ -1,0 +1,30 @@
+
+issuer: https://wac-hospital.loc/dex  # URL, kde pobeží Dex
+storage:
+  type: kubernetes
+  config:
+    inCluster: true
+oauth2:
+  skipApprovalScreen: true
+web:
+  http: 0.0.0.0:5556
+
+connectors:  # GitHub OAuth provider
+- type: github
+  id: github
+  name: GitHub
+  config:
+    clientID: $GITHUB_CLIENT_ID
+    clientSecret: $GITHUB_CLIENT_SECRET
+    redirectURI: https://wac-hospital.loc/dex/callback
+
+staticClients:  # WAC hospital client of Dex
+- id: envoy-gateway
+  redirectURIs:
+  - 'https://wac-hospital.loc/authn/callback'
+  name: 'Envoy Gateway'
+  secret: envoy-gateway-secret-265305158967
+
+telemetry:
+  tracing:
+    enabled: false

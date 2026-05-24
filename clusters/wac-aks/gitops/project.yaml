@@ -1,0 +1,12 @@
+apiVersion: wac-fiit.github.io/v1alpha1
+kind: Project
+metadata:
+  name: cv2xvancoa-blood-donors # napr. <pfx>-ambulance-wl
+spec:
+  title: Zoznam čakajúcich xvancoa # napr. "Zoznam čakajúcich <pfx>"
+  description: Spravuje zoznam pacientov čakajúcich na vyšetrenie v ambulancii # napr. "Spravuje zoznam pacientov čakajúcich na vyšetrenie v ambulancii"
+  authors: "Adrián Vančo" # Zadajte mená autorov
+  azureLink: "https://cv2xvancoa-blood-donors.azurewebsites.net"
+  frontendRepoUrl: "https://github.com/AdrianVanco/blood-donors-ufe"
+  backendRepoUrl: "https://github.com/AdrianVanco/blood-donors-webapi"
+  gitopsRepoUrl: "https://github.com/AdrianVanco/blood-donors-gitops"

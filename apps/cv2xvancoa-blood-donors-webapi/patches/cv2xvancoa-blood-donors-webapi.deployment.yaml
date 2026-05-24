@@ -1,0 +1,14 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cv2xvancoa-blood-donors-webapi
+spec:
+  template:
+    spec:
+      containers:
+        - name: openapi-ui
+          env:
+            - name: URL
+              value: /cv2xvancoa-openapi
+            - name: BASE_URL
+              value: /cv2xvancoa-openapi-ui
