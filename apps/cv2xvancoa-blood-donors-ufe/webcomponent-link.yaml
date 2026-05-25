@@ -7,9 +7,9 @@ spec:
   element: polyfea-md-app # element, ktorý bude vložený na stránku
   attributes: # atribúty elementu polyfea-md-app
     - name: headline
-      value: Darcovia krvi
+      value: Darcovia krvi cv2xvancoa
     - name: short-headline
-      value: Darcovia krvi
+      value: Darcovia krvi cv2xvancoa
     - name: supporting-text
       value: |
         Registrácia a správa darcov krvi
