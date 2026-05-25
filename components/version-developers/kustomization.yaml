@@ -3,7 +3,7 @@ kind: Component
 images:
 - name: xvancoa/cv2xvancoa-blood-donors-ufe
   newName: xvancoa/cv2xvancoa-blood-donors-ufe # {"$imagepolicy":  "wac-hospital:cv2xvancoa-blood-donors-ufe:name"}
-  newTag: main.20260525.1613 # {"$imagepolicy": "wac-hospital:cv2xvancoa-blood-donors-ufe:tag"}
+  newTag: main.20260525.1727 # {"$imagepolicy": "wac-hospital:cv2xvancoa-blood-donors-ufe:tag"}
 - name: xvancoa/cv2xvancoa-blood-donors-webapi
   newName: xvancoa/cv2xvancoa-blood-donors-webapi # {"$imagepolicy":  "wac-hospital:cv2xvancoa-blood-donors-webapi:name"}
   newTag: main.20260524.2134 # {"$imagepolicy": "wac-hospital:cv2xvancoa-blood-donors-webapi:tag"}
