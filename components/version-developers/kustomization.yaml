@@ -6,4 +6,4 @@ images:
   newTag: main.20260526.2243 # {"$imagepolicy": "wac-hospital:cv2xvancoa-blood-donors-ufe:tag"}
 - name: xvancoa/cv2xvancoa-blood-donors-webapi
   newName: xvancoa/cv2xvancoa-blood-donors-webapi # {"$imagepolicy":  "wac-hospital:cv2xvancoa-blood-donors-webapi:name"}
-  newTag: main.20260526.2131 # {"$imagepolicy": "wac-hospital:cv2xvancoa-blood-donors-webapi:tag"}
+  newTag: main.20260526.2242 # {"$imagepolicy": "wac-hospital:cv2xvancoa-blood-donors-webapi:tag"}
