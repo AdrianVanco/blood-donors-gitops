@@ -5,7 +5,7 @@ metadata:
   namespace: wac-hospital
   annotations:
     cert-manager.io/issuer: development-issuer # patch this to letsencrypt-issuer for production cluster
-    cert-manager.io/email-sans: "vancoadrian7@gmail.com"
+    cert-manager.io/email-sans: "xvancoa@stuba.sk"
     cert-manager.io/subject-organizations: "WAC-Hospital"
     cert-manager.io/subject-organizationalunits: "IT Support"
     cert-manager.io/subject-countries: "SK"

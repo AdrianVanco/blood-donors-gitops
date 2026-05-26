@@ -45,12 +45,36 @@ user_role[ "admin" ] if {
 
 # these are admin users
 user_role[ "admin" ] if {
-    user.email == "vancoadrian7@gmail.com"
+    user.email == "xvancoa@stuba.sk"
 }
 
 # these are users with access to monitoring actions
 user_role[ "monitoring" ] if {
-    user.email == "vancoadrian7@gmail.com"
+    user.email == "xvancoa@stuba.sk"
+}
+
+# --- Aplikačné role pre Darcovia krvi (cv2xvancoa-blood-donors) ---
+# pracovník transfúznej stanice = explicitný zoznam emailov (allow-list).
+# Pridaj sem emaily kolegov-pracovníkov. Tento zoznam musí ostať
+# zhodný s WORKER_EMAILS v blood-donors-ufe/src/global/auth.ts.
+worker_emails := {
+    "xvancoa@stuba.sk",
+    # cvičiaci (aby sa pri hodnotení vedeli prihlásiť ako pracovník)
+    "qunger@stuba.sk",
+    "qmicuch@stuba.sk",
+    "qsevcikm@stuba.sk",
+    "qhudakm1@stuba.sk",
+}
+
+# pracovník (staff) - smie spravovať zoznam darcov a editovať ľubovoľného darcu
+user_role["pracovnik"] if {
+    worker_emails[user.email]
+}
+
+# darca - každý prihlásený používateľ, ktorý nie je pracovník
+user_role["darca"] if {
+    user.valid
+    not worker_emails[user.email]
 }
 
 # action is allowed if there is some role that is in user roles

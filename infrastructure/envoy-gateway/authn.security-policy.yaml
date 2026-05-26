@@ -20,6 +20,10 @@ spec:
       clientSecret:
         name: oidc-dex
       redirectURL: https://wac-hospital.loc/authn/callback
+      # Odhlásenie: navigácia na túto cestu spôsobí, že OAuth2 filter vyčistí
+      # OIDC cookies (id/access token). Cesta musí spadať pod niektorú HTTPRoute
+      # brány - /fea/logout patrí pod /fea route portálu (polyfea-controller).
+      logoutPath: /fea/logout
       forwardAccessToken: true
       cookieNames:
         idToken: wac-hospital-id-token

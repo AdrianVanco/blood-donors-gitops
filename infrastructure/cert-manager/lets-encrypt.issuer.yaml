@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   acme:
-    email: vancoadrian7@gmail.com
+    email: xvancoa@stuba.sk
     server: https://acme-staging-v02.api.letsencrypt.org/directory  # Use this for testing
     privateKeySecretRef:
       name: letsencrypt-issuer-account-key
