@@ -3,7 +3,7 @@ kind: Component
 images:
 - name: xvancoa/cv2xvancoa-blood-donors-ufe
   newName: xvancoa/cv2xvancoa-blood-donors-ufe
-  newTag: 1.0.0
+  newTag: 1.1.0
 - name: xvancoa/cv2xvancoa-blood-donors-webapi
   newName: xvancoa/cv2xvancoa-blood-donors-webapi
-  newTag: 1.0.0
+  newTag: 1.1.0
