@@ -5,7 +5,7 @@ do spoločného portálu „WAC Hospital" ako microfrontend.
 
 ## Členovia tímu
 
-- Adrián Vančo (login `xvancoa`, `xvancoa@stuba.sk`)
+- Adrián Vančo
 
 ## Názov a identita aplikácie na spoločnom klastri
 
@@ -24,11 +24,18 @@ do spoločného portálu „WAC Hospital" ako microfrontend.
 
 ## Funkcionalita v skratke
 
-- Zoznam darcov s filtrami, stránkovaním a prepínačom typu odberu (krv/plazma).
-- Rezervácia termínu cez kalendár s pravidlami NTS SR (odstup krv 70 dní / plazma
-  14 dní, ročný limit krvi — ženy 3×, muži 4×, kontrola spôsobilosti).
-- Profil darcu „Môj účet" s históriou termínov.
-- Prihlásenie cez OIDC/Dex a rozdelenie funkcií podľa role darca/pracovník.
+- **Pracovník:** zoznam darcov s filtrami, stránkovaním a prepínačom typu odberu
+  (krv/plazma), editor na vytváranie/úpravu/mazanie darcov a správu stavov termínov.
+- **Darca:** „Môj účet" s vlastnými údajmi a históriou termínov; rezervácia termínu
+  cez kalendár; zrušenie vlastnej rezervácie priamo v „Môj účet".
+- **Pravidlá rezervácií (NTS SR):** odstup krv 70 dní / plazma 14 dní, ročný limit
+  krvi (ženy 3×, muži 4×), kontrola spôsobilosti; darca môže mať súčasne len jednu
+  prebiehajúcu rezerváciu (na novú musí pôvodnú zrušiť).
+- **Autentifikácia a autorizácia:** prihlásenie cez OIDC/Dex, rozdelenie funkcií
+  podľa role darca/pracovník vynútené v UI, na gateway (OPA) aj vo webapi; odhlásenie
+  cez gateway.
+
+> Demo dáta (darcovia) sú **fiktívne a anonymizované** — slúžia len na ukážku.
 
 ## Pokyny pre cvičiacich (špecifiká fungovania)
 
@@ -59,10 +66,11 @@ Rola je viazaná na **email** v OIDC tokene, takže jeden účet = jedna rola.
     `qhudakm1@stuba.sk`) popri `xvancoa@stuba.sk`. Po prihlásení ktorýmkoľvek
     z nich uvidíte správu darcov (zoznam, editor, vytváranie/mazanie). Zoznam je
     v `worker_emails` (`policy.rego`) a `WORKER_EMAILS` (`auth.ts`).
-  - *Darca* — prihláste sa účtom, ktorý nie je v zozname pracovníkov. Účet bez
-    darcovského záznamu uvidí neutrálny stav „nemáte darcovský záznam"; demo
-    darcovský záznam je naviazaný na `vancoadrian7@gmail.com` (s ním vidno plný
-    profil aj termíny).
+  - *Darca* — prihláste sa účtom, ktorý nie je v zozname pracovníkov. Demo
+    darcovia sú fiktívni (anonymizované údaje), takže účet bez vlastného záznamu
+    uvidí neutrálny stav „nemáte darcovský záznam". Plný darcovský profil
+    najrýchlejšie uvidíte lokálne cez `?role=darca`, alebo nech pracovník vytvorí
+    darcu s vaším emailom.
   - Pozn.: keďže rola = email, jeden účet zobrazuje vždy len jednu rolu.
     Pracovník nemá „Môj účet"/„Rezerváciu" (to potvrdzuje funkčnosť rozdelenia).
 - **Lokálne bez prihlásenia (mock / FE+BE):** rolu prepnete priamo v URL —
