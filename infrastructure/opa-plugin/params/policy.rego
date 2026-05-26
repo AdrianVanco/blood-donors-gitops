@@ -30,6 +30,16 @@ request_allowed_role["monitoring"] := true if {
 #    not glob.match("/http-echo*", [], http_request.path)
 # }
 
+# Darca aj pracovník majú prístup k aplikácii Darcovia krvi (čokoľvek okrem
+# /monitoring). Bez tohto pravidla by gateway pustil len admina a bežní
+# prihlásení používatelia (darca) by dostali "Access denied".
+request_allowed_role["darca"] := true if {
+    not glob.match("/monitoring*", [], http_request.path)
+}
+request_allowed_role["pracovnik"] := true if {
+    not glob.match("/monitoring*", [], http_request.path)
+}
+
 # define roles for user
 
 # any user with valid email is user
